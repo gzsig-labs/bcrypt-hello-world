@@ -4,7 +4,7 @@ const app = require('./appConfig.js');
 const mongoose = require('mongoose')
 
 mongoose
-  .connect('mongodb://localhost/appName', {useNewUrlParser: true})
+  .connect('mongodb://localhost/bcryptLab', {useNewUrlParser: true})
   .then(db => {
     console.log(`Connected to Mongo! Database name: "${db.connections[0].name}"`)
   })

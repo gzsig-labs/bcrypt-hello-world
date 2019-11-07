@@ -4,6 +4,9 @@
 
   <label for="password">Password</label><br>
   <input type="password" name="password" placeholder="********">
+  {{#if errorMsg}}
+    <div class="error-message">{{errorMsg}}</div>
+  {{/if}}
 
   <button type="submit">Create account</button>
 </form>
