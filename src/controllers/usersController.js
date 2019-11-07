@@ -95,11 +95,19 @@ const UserSecrete = (req, res) => {
   res.render('pages/logedin')
 };
 
+const UserLogout = (req, res) => {
+  req.session.destroy((err) => {
+    // cannot access session here
+    res.redirect("/login");
+  });
+}
+
 module.exports = {
   UserSignup,
   UserSignupPost,
   UserSignin,
   UserSigninPost,
   UserVerify,
-  UserSecrete
+  UserSecrete,
+  UserLogout
 }

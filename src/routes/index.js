@@ -14,6 +14,8 @@ router.post('/login', User.UserSigninPost);
 
 router.use(User.UserVerify);
 router.get("/secret", User.UserSecrete);
+router.get("/logout", User.UserLogout);
+
 
 
 module.exports = {router}
