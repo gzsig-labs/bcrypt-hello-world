@@ -49,8 +49,57 @@ const UserSignin = (req, res) => {
   res.render('./auth/login')
 };
 
+const UserSigninPost = (req, res) => {
+  const theUsername = req.body.username;
+  const thePassword = req.body.password;
+
+  if (theUsername === "" || thePassword === "") {
+    res.render("auth/login", {
+      errorMsg: "Please enter both, username and password to sign up."
+    });
+    return;
+  }
+
+  UserModel.findOne({ "username": theUsername })
+  .then(user => {
+      if (!user) {
+        res.render("auth/login", {
+          errorMsg: "The username doesn't exist."
+        });
+        return;
+      }
+      if (bcrypt.compareSync(thePassword, user.password)) {
+        // Save the login in the session!
+        req.session.currentUser = user;
+        res.redirect("/secret");
+      } else {
+        res.render("auth/login", {
+          errorMsg: "Incorrect password"
+        });
+      }
+  })
+  .catch(error => {
+    next(error);
+  })
+};
+
+const UserVerify = (req, res, next) => {
+  if (req.session.currentUser) { 
+    next(); 
+  } else {                         
+    res.redirect("/login");        
+  }                                
+};
+
+const UserSecrete = (req, res) => {
+  res.render('pages/logedin')
+};
+
 module.exports = {
   UserSignup,
   UserSignupPost,
-  UserSignin
+  UserSignin,
+  UserSigninPost,
+  UserVerify,
+  UserSecrete
 }

@@ -9,5 +9,11 @@ router.get('/', Page.PageHome);
 router.get('/signup', User.UserSignup);
 router.post('/signup', User.UserSignupPost);
 router.get('/login', User.UserSignin);
+router.post('/login', User.UserSigninPost);
+
+
+router.use(User.UserVerify);
+router.get("/secret", User.UserSecrete);
+
 
 module.exports = {router}
