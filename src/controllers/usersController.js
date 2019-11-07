@@ -92,7 +92,8 @@ const UserVerify = (req, res, next) => {
 };
 
 const UserSecrete = (req, res) => {
-  res.render('pages/logedin')
+  const user = req.session.currentUser
+  res.render('pages/logedin', {user})
 };
 
 const UserLogout = (req, res) => {
