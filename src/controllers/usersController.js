@@ -45,7 +45,12 @@ const UserSignupPost = (req, res) => {
   })
 };
 
+const UserSignin = (req, res) => {
+  res.render('./auth/login')
+};
+
 module.exports = {
   UserSignup,
-  UserSignupPost
+  UserSignupPost,
+  UserSignin
 }
